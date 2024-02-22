@@ -1,0 +1,49 @@
+#include <bits/stdc++.h> 
+/****************************************************************
+    Following is the class structure of the Node class:
+    class Node
+    {
+    public:
+        int data;
+        Node *next;
+        Node(int data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+*****************************************************************/
+
+Node *reverseSublist(Node *head, int x, int y)
+{ Node *newHead=new Node(-1);
+    newHead->next=head;
+
+    Node *pre=NULL,*cur=NULL,*forward=NULL,*tem=NULL;
+
+    int c=1;
+    pre=NULL,cur=newHead;
+    while(c<x){
+        cur=cur->next;
+        c++;
+    }
+
+    tem=cur;
+    pre=cur->next;
+    cur=cur->next->next;
+
+    while(c<y){
+        forward=cur->next;
+        cur->next=pre;
+        pre=cur;
+        cur=forward;
+
+        c++;
+    }
+    tem->next->next=cur;
+    tem->next=pre;
+
+    head=newHead->next;
+
+    return head;
+
+}
